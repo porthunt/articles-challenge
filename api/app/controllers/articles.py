@@ -10,7 +10,7 @@ COLLECTION_NAME = "articles"
 def search(
     value: Optional[str] = None,
     page: Optional[int] = 1,
-    limit: Optional[int] = 0,
+    limit: Optional[int] = 20,
 ):
     if page < 1 or limit < 1:
         raise InvalidInputError(

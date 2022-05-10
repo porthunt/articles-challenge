@@ -15,10 +15,11 @@ def test_search():
     collection = db.get_collection("articles")
     collection.insert_many(objects)
     search = articles.search()
+    print(search)
     assert len(search["data"]) == 2
-    assert search["total_pages"] == 0
+    assert search["total_pages"] == 1
     assert search["page"] == 1
-    assert search["limit"] == 0
+    assert search["limit"] == 20
 
 
 @mongomock.patch(servers=(("localhost", 27017),))
