@@ -1,0 +1,29 @@
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - "27016:27017"
+  
+  load-mongo:
+        build:
+          context: ./resources
+          dockerfile: Dockerfile
+          args:
+            - DB_HOST=mongodb://mongo:27017
+            - COLLECTION=articles
+            - DB_NAME=healx-challenge
+        depends_on:
+            - mongo
+
+  api:
+    container_name: articles-api
+    build:
+      context: ./api
+      args:
+        - DB_HOST=mongo
+    ports:
+      - 8080:8080
+    links:
+      - mongo

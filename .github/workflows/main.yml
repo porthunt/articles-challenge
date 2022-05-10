@@ -1,0 +1,44 @@
+name: Check lint/tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'api/**'
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./api
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: make init
+
+      - name: Run lint
+        run: make lint
+  
+  tests:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./api
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '17'
+
+      - name: Install dependencies
+        run: make init
+
+      - name: Unit tests
+        run: make unit
+        timeout-minutes: 1
