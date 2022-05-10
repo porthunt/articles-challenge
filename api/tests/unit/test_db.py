@@ -82,11 +82,11 @@ def test_retrieve_by_attribute_no_filters_pagination():
     collection.insert_many(objects)
     documents = db.retrieve_by_attribute(COLLECTION)
     assert len(documents) == 3
-    documents = db.retrieve_by_attribute(COLLECTION, page=0, limit=1)
-    assert documents[0]["_id"]["$oid"] == "62799f97c6dd2fb89f7b4448"
     documents = db.retrieve_by_attribute(COLLECTION, page=1, limit=1)
-    assert documents[0]["_id"]["$oid"] == "62799f97c6dd2fb89f7b444a"
+    assert documents[0]["_id"]["$oid"] == "62799f97c6dd2fb89f7b4448"
     documents = db.retrieve_by_attribute(COLLECTION, page=2, limit=1)
+    assert documents[0]["_id"]["$oid"] == "62799f97c6dd2fb89f7b444a"
+    documents = db.retrieve_by_attribute(COLLECTION, page=3, limit=1)
     assert documents[0]["_id"]["$oid"] == "62799f97c6dd2fb89f7b664a"
 
 

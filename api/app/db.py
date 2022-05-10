@@ -36,13 +36,13 @@ def remove_document(collection_name: str, _id: str):
 def retrieve_by_attribute(
     collection_name: str,
     filter: Optional[Dict[str, str]] = None,
-    page: Optional[int] = 0,
+    page: Optional[int] = 1,
     limit: Optional[int] = 0,
 ):
     filter = filter if filter else {}
     collection = get_collection(collection_name)
     try:
-        results = collection.find(filter).skip(limit * page).limit(limit)
+        results = collection.find(filter).skip(limit * (page - 1)).limit(limit)
         return json.loads(json_util.dumps(results))
     except pymongo.errors.ServerSelectionTimeoutError:
         raise DBUnreachableError()

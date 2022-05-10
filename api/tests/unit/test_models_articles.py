@@ -1,6 +1,8 @@
 import mongomock
+import pytest
 from bson import ObjectId
-from app.models import articles
+from app.errors import InvalidInputError
+from app.controllers import articles
 from app import db
 
 
@@ -15,8 +17,14 @@ def test_search():
     search = articles.search()
     assert len(search["data"]) == 2
     assert search["total_pages"] == 0
-    assert search["page"] == 0
+    assert search["page"] == 1
     assert search["limit"] == 0
+
+
+@mongomock.patch(servers=(("localhost", 27017),))
+def test_search_invalid_page():
+    with pytest.raises(InvalidInputError):
+        articles.search(page=0)
 
 
 @mongomock.patch(servers=(("localhost", 27017),))

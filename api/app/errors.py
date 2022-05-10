@@ -37,3 +37,8 @@ class UnknownError(Error):
 class DBUnreachableError(Error):
     status_code = 503
     default_message = "Can't reach MongoDB"
+
+
+class InvalidInputError(Error):
+    status_code = 400
+    default_message = "Invalid Input"

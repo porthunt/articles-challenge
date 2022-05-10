@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from typing import Optional
-from app.models.reading_list import search, ReadingListItem, add, remove
+from app.controllers.reading_list import search, add, remove
+from app.models.reading_list import ReadingListItem
 from app.errors import Error, UnknownError
 
 
@@ -8,11 +8,8 @@ router = APIRouter(prefix="/reading-list", tags=["reading-list"])
 
 
 @router.get("/")
-def retrieve_reading_list(
-    page: Optional[int] = 0,
-    limit: Optional[int] = 100,
-):
-    return search(page=page, limit=limit)
+def retrieve_reading_list():
+    return search()
 
 
 @router.post("/", status_code=201)
