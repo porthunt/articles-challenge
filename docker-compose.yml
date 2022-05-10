@@ -5,16 +5,17 @@ services:
     image: mongo:latest
     ports:
       - "27016:27017"
+    command: --quiet
   
   load-mongo:
         build:
-          context: ./resources
+          context: ./mongo
           dockerfile: Dockerfile
           args:
             - DB_HOST=mongodb://mongo:27017
             - COLLECTION=articles
             - DB_NAME=healx-challenge
-        depends_on:
+        links:
             - mongo
 
   api:
@@ -27,3 +28,14 @@ services:
       - 8080:8080
     links:
       - mongo
+
+  fe:
+    container_name: articles-fe
+    build:
+      context: ./fe
+      args:
+            - API_URL=http://localhost:8080
+    ports:
+      - 3000:3000
+    links:
+      - api
