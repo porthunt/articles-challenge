@@ -16,7 +16,7 @@ There are two icons at the bottom of each article. It's possible to view it or a
 
 Execute the following commands to configure the environment (Unix based):
 ```shell
-$ cd healx-challenge/fe/
+$ cd articles-challenge/fe/
 $ npm install
 $ export REACT_APP_API_URL=http://localhost:8000 && npm start
 ```

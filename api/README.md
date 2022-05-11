@@ -10,7 +10,7 @@ The purpose of this API is to retrieve the articles information from mongoDB and
 
 Execute the following commands to configure the environment (Unix based):
 ```shell
-$ cd healx-challenge/api/
+$ cd articles-challenge/api/
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
 $ make init

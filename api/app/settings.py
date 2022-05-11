@@ -5,6 +5,6 @@ MONGODB_INFO = {
     "password": os.getenv("MONGO_PWD", ""),
     "host": os.getenv("MONGO_HOST", "localhost"),
     "port": int(os.getenv("MONGO_PORT", 27017)),
-    "db_name": "healx-challenge",
+    "db_name": "articles-challenge",
     "timeout": 5000,
 }

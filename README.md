@@ -1,4 +1,4 @@
-# healx-challenge
+# articles-challenge
 The purpose of this challenge is to create an API (`api/`) that retrieves articles data and also allow adding items to a reading list. This data needs to be available for the frontend (`fe/`) to consume and display it.
 
 For more information on each specific part of the code, please access their directories.
@@ -13,7 +13,7 @@ It is possible to use `docker-compose` to setup the entire environment. It will 
 
 To start the services, type:
 ```shell
-$ cd healx-challenge/
+$ cd articles-challenge/
 $ docker-compose build --no-cache
 $ docker-compose up
 ```
