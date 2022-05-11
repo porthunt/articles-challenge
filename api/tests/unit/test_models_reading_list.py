@@ -17,7 +17,7 @@ def test_search():
     collection.insert_many(objects)
     search = reading_list.search()
     assert len(search["data"]) == 2
-    assert search["total_records"] == 2
+    assert search["totalRecords"] == 2
 
 
 @mongomock.patch(servers=(("localhost", 27017),))

@@ -12,10 +12,10 @@ class SearchResults(BaseModel):
     def to_json(self):
         response = {
             "data": self.data,
-            "total_records": self.total_records,
+            "totalRecords": self.total_records,
         }
         if self.page > 0:
-            response["total_pages"] = (
+            response["totalPages"] = (
                 ceil(self.total_records / self.limit) if self.limit else 0
             )
             response["page"] = self.page

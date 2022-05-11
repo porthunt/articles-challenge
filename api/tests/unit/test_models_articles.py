@@ -17,7 +17,7 @@ def test_search():
     search = articles.search()
     print(search)
     assert len(search["data"]) == 2
-    assert search["total_pages"] == 1
+    assert search["totalPages"] == 1
     assert search["page"] == 1
     assert search["limit"] == 20
 

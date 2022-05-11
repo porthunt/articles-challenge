@@ -45,7 +45,7 @@ $ uvicorn main:app --reload
 ## Improvements
 * The endpoints currently return the entire object from the database. It would be better to return just the attributes that are used on the frontend (title, authors, date, journal and url). This would ensure a model for the output of the articles and would decrease the amount of data that the frontend receives.
 
-* Currently the errors are handled on each endpoint. It would be a better approach to add a middleware to handle all possible errors. If it's based on an known error, we would have the status code and return appropriately if not, a 5XX error would be returned.
+* Currently the errors are handled on each endpoint. It would be a better approach to add a middleware to handle all possible errors. If it's based on a known error, we would have the status code and return appropriately if not, a 5XX error would be returned.
 
 * Since `mongoimport` creates an `ObjectId` for each entry, I didn't bother on changing this. If I had more time, I would try making the `cord_uid` as the `ObjectId`.
 
