@@ -7,7 +7,7 @@ For more information on each specific part of the code, please access their dire
 
 It is possible to use `docker-compose` to setup the entire environment. It will create 4 containers:
 * `mongo`: deploys a mongodb locally (running on a different port, don't worry if you have one setup already).
-* `load-mongo`: downloads the CSV file from S3 and imports it to `mongo`. It shuts down after this.
+* `load-mongo`: downloads the CSV file from S3 and imports it to `mongo`. It shuts down once its done.
 * `api`: deploys the API locally to port `8080`.
 * `fe`: deploys the frontend locally to port `3000`.
 
@@ -22,4 +22,4 @@ $ docker-compose up
 
 This will not run on dettach mode, so when you don't need the services anymore, you can press `Ctrl+C` or `Cmd+C`, which will stop the containers.
 
-You can execute `docker-compose rm` to remove the containers.
+You can execute `docker-compose rm` to remove them.
