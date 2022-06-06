@@ -13,10 +13,7 @@ from app.models.page_info import Connection, PageInfo
 
 def get_bookmarks() -> Connection[Article]:
     results, qty = search()
-    articles = [
-        generate_article(a)
-        for a in results
-    ]
+    articles = [generate_article(a) for a in results]
     return Connection(
         page_info=PageInfo(
             total_records=qty,
@@ -27,7 +24,7 @@ def get_bookmarks() -> Connection[Article]:
     )
 
 
-def add_bookmark(article_id: str) -> Article:
+def add(article_id: str) -> Article:
     try:
         article = db.retrieve_by_id(
             ARTICLES_COLLECTION_NAME,
@@ -42,3 +39,18 @@ def add_bookmark(article_id: str) -> Article:
         raise errors.InvalidArticleIDError()
     except DuplicateKeyError:
         raise errors.ReadListItemConflictError()
+
+
+def remove(article_id: str):
+    try:
+        article = db.retrieve_by_id(
+            ARTICLES_COLLECTION_NAME,
+            article_id,
+        )
+        if article:
+            db.remove_document(COLLECTION_NAME, article_id)
+            return generate_article(article)
+        else:
+            raise errors.ArticleNotFoundError()
+    except bson.errors.InvalidId:
+        raise errors.InvalidArticleIDError()

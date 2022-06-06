@@ -60,10 +60,7 @@ def get_articles(
     title: str = None, page: int = 1, limit: int = 10
 ) -> Connection[Article]:
     results, qty = search(title, page=page, limit=limit)
-    articles = [
-        generate_article(a)
-        for a in results
-    ]
+    articles = [generate_article(a) for a in results]
 
     return Connection(
         page_info=PageInfo(

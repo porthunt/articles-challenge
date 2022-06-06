@@ -16,7 +16,11 @@ class Query:
 class Mutation:
     @strawberry.mutation
     def add_bookmark(self, article_id: str) -> Article:
-        return bookmark.add_bookmark(article_id)
+        return bookmark.add(article_id)
+
+    @strawberry.mutation
+    def remove_bookmark(self, article_id: str) -> Article:
+        return bookmark.remove(article_id)
 
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
