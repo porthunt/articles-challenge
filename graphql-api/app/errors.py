@@ -21,7 +21,7 @@ class ArticleNotFoundError(Error):
 
 class ReadListItemConflictError(Error):
     status_code = 409
-    default_message = "Article is already on the Reading List"
+    default_message = "Article is already bookmarked"
 
 
 class InvalidArticleIDError(Error):

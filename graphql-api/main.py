@@ -19,4 +19,4 @@ app.add_middleware(
 )
 
 
-app.add_route("/graphql", graphql_app)
+app.add_route("/", graphql_app)
