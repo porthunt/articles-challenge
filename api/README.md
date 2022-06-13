@@ -1,4 +1,5 @@
 # Articles API
+> Deprecated: Using `/graphql-api` instead.
 
 The purpose of this API is to retrieve the articles information from mongoDB and adding articles to a reading list.
 

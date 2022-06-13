@@ -1,13 +1,13 @@
 import ArticlesList from "./ArticlesList/ArticlesList";
 import Menu from "./Menu/Menu";
 import { useState, useEffect } from "react";
-import { endpoints } from "./Api";
+import { API_ENDPOINT, QUERIES } from "./Api";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
-  const [articles, setArticles] = useState({ data: [] });
-  const [readingList, setReadingList] = useState({ data: [] });
+  const [articles, setArticles] = useState({ data: [], pageInfo: {} });
+  const [readingList, setReadingList] = useState({ data: [], pageInfo: {} });
   const [searchTerm, setSearchTerm] = useState("");
   const [displayed, setDisplayed] = useState("articles");
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,9 +16,9 @@ const App = () => {
     setSearchTerm(term);
     setCurrentPage(page);
     return axios
-      .get(`${endpoints.getArticles}?term=${term}&limit=10&page=${page}`)
+      .post(API_ENDPOINT, {query: QUERIES.articles, variables: {"page": page, "limit": 10, "term": term}})
       .then((res) => {
-        setArticles(res.data);
+        setArticles(res.data.data.articles);
       })
       .catch((err) => {
         console.log(err);
@@ -28,9 +28,9 @@ const App = () => {
 
   const retrieveReadingList = () => {
     return axios
-      .get(`${endpoints.readingList}`)
+      .post(API_ENDPOINT, {query: QUERIES.bookmarks})
       .then((res) => {
-        setReadingList(res.data);
+        setReadingList(res.data.data.bookmarks);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +40,7 @@ const App = () => {
 
   const addToReadingList = (id) => {
     axios
-      .post(`${endpoints.readingList}`, { article_id: id })
+      .post(API_ENDPOINT, {query: QUERIES.addBookmark, variables: {"articleId": id}})
       .then((_) => {
         retrieveReadingList();
       })
@@ -51,7 +51,7 @@ const App = () => {
 
   const removeFromReadingList = (id) => {
     axios
-      .delete(`${endpoints.readingList}/${id}`)
+      .post(API_ENDPOINT, {query: QUERIES.removeBookmark, variables: {"articleId": id}})
       .then((_) => {
         retrieveReadingList();
       })

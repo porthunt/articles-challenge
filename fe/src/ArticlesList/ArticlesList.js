@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import ArticlesPagination from "../ArticlesPagination/ArticlesPagination";
 
 const isInReadingList = (id, readingList) => {
-  return readingList.some((article) => article._id.$oid === id);
+  return readingList.some((article) => article.Id === id);
 };
 
 const ArticlesList = (props) => {
@@ -15,7 +15,7 @@ const ArticlesList = (props) => {
       {props.showSearch ? (
         <SearchArea
           searchSubmit={props.searchSubmit}
-          totalRecords={props.articles.totalRecords}
+          totalRecords={props.articles.pageInfo.totalRecords}
         />
       ) : null}
       <Row md={5}>
@@ -23,12 +23,12 @@ const ArticlesList = (props) => {
           props.articles.data.map((article) => {
             return (
               <ArticleTile
-                key={article._id.$oid}
+                key={article.Id}
                 article={article}
                 addToReadingList={props.addToReadingList}
                 removeFromReadingList={props.removeFromReadingList}
                 inReadingList={isInReadingList(
-                  article._id.$oid,
+                  article.Id,
                   props.readingList.data
                 )}
               />
@@ -38,10 +38,10 @@ const ArticlesList = (props) => {
           <span>Nothing to display.</span>
         )}
       </Row>
-      {props.articles.page ? (
+      {props.articles.pageInfo.page ? (
         <ArticlesPagination
-          page={props.articles.page}
-          total={props.articles.totalPages}
+          page={props.articles.pageInfo.page}
+          total={props.articles.pageInfo.totalPages}
           changePage={props.changePage}
           term={props.term}
         />

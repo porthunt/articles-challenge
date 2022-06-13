@@ -18,10 +18,21 @@ services:
         links:
             - mongo
 
-  api:
-    container_name: articles-api
+  # api:
+  #   container_name: articles-api
+  #   build:
+  #     context: ./api
+  #     args:
+  #       - DB_HOST=mongo
+  #   ports:
+  #     - 8080:8080
+  #   links:
+  #     - mongo
+
+  graphql-api:
+    container_name: articles-graphql-api
     build:
-      context: ./api
+      context: ./graphql-api
       args:
         - DB_HOST=mongo
     ports:
@@ -38,4 +49,4 @@ services:
     ports:
       - 3000:3000
     links:
-      - api
+      - graphql-api

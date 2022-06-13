@@ -7,8 +7,8 @@ const ArticleTile = (props) => {
   return (
     <Col className="d-flex mt-3">
       <Card
-        id={props.article._id.$oid}
-        key={props.article._id.$oid}
+        id={props.article.Id}
+        key={props.article.Id}
         className="flex-fill"
         style={{ width: "18rm" }}
       >
@@ -32,8 +32,8 @@ const ArticleTile = (props) => {
             href="#"
             onClick={() =>
               props.inReadingList
-                ? props.removeFromReadingList(props.article._id.$oid)
-                : props.addToReadingList(props.article._id.$oid)
+                ? props.removeFromReadingList(props.article.Id)
+                : props.addToReadingList(props.article.Id)
             }
           >
             {props.inReadingList ? <BookmarkFill /> : <Bookmark />}
